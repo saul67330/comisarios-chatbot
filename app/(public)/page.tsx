@@ -45,7 +45,7 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="flex-1 flex flex-col justify-end max-w-2xl mx-auto w-full px-4 pt-[20vh] md:pt-[25vh] pb-4 h-[calc(100vh-100px)] md:h-[calc(100vh-80px)]">
+    <div className="flex-1 flex flex-col justify-end max-w-2xl mx-auto w-full px-4 pt-4 pb-4 min-h-[calc(100vh-250px)]">
       {/* Header/Identity */}
       <div className="text-center mb-4 mt-auto">
         <h1 className="font-['Rye'] text-4xl md:text-5xl font-bold text-white tracking-widest mb-1 drop-shadow-[0_10px_25px_rgba(0,0,0,1)]">Comisarios AI</h1>

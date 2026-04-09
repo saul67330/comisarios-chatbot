@@ -15,7 +15,7 @@ export default function BottomNavBar() {
   };
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe bg-[#131313]/80 backdrop-blur-2xl rounded-t-3xl border-t border-[#D4AF37]/20 z-50 shadow-[0_-10px_40px_rgba(212,175,55,0.1)]">
+    <nav className="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center pt-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] bg-[#131313]/90 backdrop-blur-3xl border-t border-white/10 z-50 shadow-[0_-20px_50px_rgba(0,0,0,0.9)]">
       <Link href="/" className={getLinkClasses('/')}>
         <MessageSquare size={20} className={pathname === '/' ? 'fill-[#D4AF37]' : ''} />
         <span>Chat</span>

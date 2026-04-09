@@ -1,0 +1,17 @@
+{
+  "name": "Comisarios Del Norte",
+  "short_name": "Comisarios",
+  "description": "App oficial de Comisarios Del Norte. Chatbot, Gira y Muro Social.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#131313",
+  "theme_color": "#131313",
+  "icons": [
+    {
+      "src": "https://kkqphhhejfgvdnycabqt.supabase.co/storage/v1/object/public/public_assets/real/evento_quinceanera.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

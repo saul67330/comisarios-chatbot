@@ -5,6 +5,20 @@ export const metadata: Metadata = {
   title: "Comisarios Del Norte — Chat",
   description: "Chatbot oficial de Comisarios Del Norte. Consulta eventos, contrataciones, mercancía e información del grupo.",
   keywords: ["Comisarios Del Norte", "grupo norteño", "música regional", "contrataciones", "eventos"],
+  manifest: "/manifest.json",
+  themeColor: "#131313",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Comisarios",
+  },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+    viewportFit: "cover",
+  },
 };
 
 export default function RootLayout({

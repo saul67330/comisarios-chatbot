@@ -69,7 +69,7 @@ export default function AboutPage() {
   return (
     <div className="max-w-4xl mx-auto w-full px-6 py-12">
       <div className="text-center mb-16 pt-[15vh]">
-        <h1 className="font-headline text-5xl md:text-7xl font-extrabold text-white tracking-tighter mb-4 italic drop-shadow-[0_10px_25px_rgba(0,0,0,1)]">Los Comisarios</h1>
+        <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl font-extrabold text-white tracking-tighter mb-4 italic drop-shadow-[0_10px_25px_rgba(0,0,0,1)]">Los Comisarios</h1>
         <p className="font-label text-sm md:text-base uppercase tracking-[0.4em] text-[#D4AF37] font-extrabold drop-shadow-[0_5px_15px_rgba(0,0,0,1)]">Nuestra Historia y Contacto</p>
       </div>
 

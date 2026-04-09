@@ -23,7 +23,7 @@ export default function MerchPage() {
   return (
     <div className="max-w-6xl mx-auto w-full px-6 py-12">
       <div className="text-center mb-16 pt-[15vh]">
-        <h1 className="font-['Rye'] text-5xl md:text-7xl font-bold text-white tracking-widest mb-4 drop-shadow-[0_10px_25px_rgba(0,0,0,1)]">Tienda Oficial</h1>
+        <h1 className="font-['Rye'] text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight sm:tracking-widest mb-4 drop-shadow-[0_10px_25px_rgba(0,0,0,1)]">Tienda Oficial</h1>
         <p className="font-label text-sm md:text-base uppercase tracking-[0.4em] text-[#D4AF37] font-extrabold drop-shadow-[0_5px_15px_rgba(0,0,0,1)]">Lleva el estilo de la frontera contigo</p>
       </div>
 

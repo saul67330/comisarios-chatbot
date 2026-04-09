@@ -14,6 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="dark">
+      <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+      </head>
       <body className="antialiased selection:bg-primary selection:text-on-primary">
         <div className="noise-overlay fixed inset-0 z-[100] pointer-events-none"></div>
         {children}

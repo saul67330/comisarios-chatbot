@@ -27,7 +27,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* SideNavBar (Desktop) */}
       <aside className="h-screen w-64 fixed left-0 top-0 bg-[#1c1b1b] border-r border-[#4d4635]/15 shadow-[40px_0_60px_rgba(0,0,0,0.5)] flex-col h-full py-8 z-50 hidden md:flex">
         <div className="px-6 mb-12">
-          <h2 className="text-[#D4AF37] font-headline italic text-lg tracking-widest">LOS REYES</h2>
+          <h2 className="text-[#D4AF37] font-headline italic text-lg tracking-widest">COMISARIOS DEL NORTE</h2>
           <p className="font-label uppercase tracking-widest text-[10px] text-[#e5e2e1]/60 mt-1">Admin Panel</p>
         </div>
         
@@ -72,7 +72,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className="md:ml-64 relative z-10 min-h-screen pb-24 md:pb-0">
         {/* Top Navbar (Mobile Only) */}
         <header className="md:hidden flex justify-between items-center px-6 py-6 bg-[#131313]/70 backdrop-blur-xl sticky top-0 z-50">
-          <span className="text-2xl font-headline font-bold text-[#D4AF37] tracking-widest uppercase">LOS REYES</span>
+          <span className="text-2xl font-headline font-bold text-[#D4AF37] tracking-widest uppercase">COMISARIOS DEL NORTE</span>
           <div className="flex items-center gap-4">
             <span className="material-symbols-outlined text-[#D4AF37]">account_circle</span>
           </div>

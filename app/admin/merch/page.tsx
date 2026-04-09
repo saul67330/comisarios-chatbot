@@ -23,6 +23,8 @@ export default function MerchPage() {
   const [showModal, setShowModal] = useState(false);
   const [editing, setEditing] = useState<Merch | null>(null);
   const [form, setForm] = useState(EMPTY);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
 
   const load = async () => {
     const { data } = await supabase.from('merchandise').select('*').order('created_at', { ascending: false });
@@ -31,18 +33,47 @@ export default function MerchPage() {
 
   useEffect(() => { load(); }, []);
 
-  const openNew = () => { setEditing(null); setForm(EMPTY); setShowModal(true); };
-  const openEdit = (m: Merch) => { setEditing(m); setForm(m); setShowModal(true); };
+  const openNew = () => { setEditing(null); setForm(EMPTY); setImageFile(null); setShowModal(true); };
+  const openEdit = (m: Merch) => { setEditing(m); setForm(m); setImageFile(null); setShowModal(true); };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (editing) {
-      await supabase.from('merchandise').update(form).eq('id', editing.id);
-    } else {
-      await supabase.from('merchandise').insert(form);
+    setUploading(true);
+    try {
+      let finalImageUrl = form.image_url;
+
+      if (imageFile) {
+        const fileExt = imageFile.name.split('.').pop();
+        const fileName = `${Math.random()}.${fileExt}`;
+        const filePath = `merch/${fileName}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from('public_assets')
+          .upload(filePath, imageFile);
+
+        if (uploadError) throw uploadError;
+
+        const { data } = supabase.storage
+          .from('public_assets')
+          .getPublicUrl(filePath);
+
+        finalImageUrl = data.publicUrl;
+      }
+
+      const updateData = { ...form, image_url: finalImageUrl };
+
+      if (editing) {
+        await supabase.from('merchandise').update(updateData).eq('id', editing.id);
+      } else {
+        await supabase.from('merchandise').insert(updateData);
+      }
+      setShowModal(false);
+      load();
+    } catch (err: any) {
+      alert(`Error guardando: ${err.message}`);
+    } finally {
+      setUploading(false);
     }
-    setShowModal(false);
-    load();
   };
 
   const handleDelete = async (id: string) => {
@@ -130,6 +161,15 @@ export default function MerchPage() {
                   <input required className="w-full bg-surface-container-low border border-outline-variant/20 rounded-xl py-3 px-4 text-sm text-on-surface focus:border-primary/50" type="number" value={form.price} onChange={(e) => setForm({ ...form, price: Number(e.target.value) })} />
                 </div>
                 <div>
+                  <label className="block text-[10px] uppercase tracking-widest text-primary font-bold mb-2">Imagen (Subir nuevo)</label>
+                  <input type="file" accept="image/*" className="w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-surface-container-high file:text-primary hover:file:bg-primary/10 transition-colors" onChange={(e) => setImageFile(e.target.files?.[0] || null)} />
+                  {form.image_url && <p className="text-[10px] text-on-surface-variant mt-2 truncate">Actual: {form.image_url}</p>}
+                </div>
+                <div>
+                  <label className="block text-[10px] uppercase tracking-widest text-primary font-bold mb-2">O pegar URL de imagen</label>
+                  <input className="w-full bg-surface-container-low border border-outline-variant/20 rounded-xl py-3 px-4 text-sm text-on-surface focus:border-primary/50" value={form.image_url || ''} onChange={(e) => setForm({ ...form, image_url: e.target.value })} placeholder="https://..." />
+                </div>
+                <div>
                   <label className="block text-[10px] uppercase tracking-widest text-primary font-bold mb-2">URL de compra</label>
                   <input className="w-full bg-surface-container-low border border-outline-variant/20 rounded-xl py-3 px-4 text-sm text-on-surface focus:border-primary/50" value={form.purchase_url || ''} onChange={(e) => setForm({ ...form, purchase_url: e.target.value })} placeholder="https://..." />
                 </div>
@@ -139,8 +179,8 @@ export default function MerchPage() {
                 </div>
               </div>
               <div className="mt-8 pt-6 border-t border-outline-variant/10 flex justify-end gap-3">
-                <button type="button" className="px-5 py-2.5 hover:bg-surface-container-highest rounded-xl font-bold text-[10px] uppercase tracking-widest text-on-surface-variant transition-colors" onClick={() => setShowModal(false)}>Cancelar</button>
-                <button type="submit" className="px-5 py-2.5 bg-gradient-to-r from-primary to-primary-container text-on-primary-container rounded-xl font-bold text-[10px] uppercase tracking-widest shadow-lg hover:opacity-90 transition-opacity">{editing ? 'Guardar' : 'Crear'}</button>
+                <button type="button" className="px-5 py-2.5 hover:bg-surface-container-highest rounded-xl font-bold text-[10px] uppercase tracking-widest text-on-surface-variant transition-colors" onClick={() => setShowModal(false)} disabled={uploading}>Cancelar</button>
+                <button type="submit" className="px-5 py-2.5 bg-gradient-to-r from-primary to-primary-container text-on-primary-container rounded-xl font-bold text-[10px] uppercase tracking-widest shadow-lg hover:opacity-90 transition-opacity disabled:opacity-50" disabled={uploading}>{uploading ? 'Guardando...' : editing ? 'Guardar' : 'Crear'}</button>
               </div>
             </form>
           </div>
